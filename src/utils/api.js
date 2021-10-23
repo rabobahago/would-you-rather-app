@@ -5,19 +5,19 @@ import {
   _saveQuestionAnswer
 } from "./_DATA.js";
 
-export function getInitialData() {
+export const getInitialData = () => {
   return Promise.all([_getUsers(), _getQuestions()]).then(
     ([users, questions]) => ({
       users,
       questions
     })
   );
-}
+};
 
-export function saveQuestionAnswer(info) {
+export const saveQuestionAnswer = (info) => {
   return _saveQuestionAnswer(info);
-}
+};
 
-export function saveQuestion(info) {
+export const saveQuestion = (info) => {
   return _saveQuestion(info);
-}
+};
