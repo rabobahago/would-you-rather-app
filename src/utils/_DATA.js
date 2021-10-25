@@ -2,7 +2,8 @@ let users = {
   sarahedo: {
     id: "sarahedo",
     name: "Sarah Edo",
-    avatarURL: "https://unsplash.com/photos/ZHvM3XIOHoE",
+    avatarURL:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.kindpng.com%2Ffree%2Favatar-icon%2F&psig=AOvVaw1ZKF0f3KVoVjkAL2-yHvEW&ust=1635257762564000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLCHs8jg5fMCFQAAAAAdAAAAABAD",
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionTwo",
@@ -14,7 +15,8 @@ let users = {
   tylermcginnis: {
     id: "tylermcginnis",
     name: "Tyler McGinnis",
-    avatarURL: "https://unsplash.com/photos/OhKElOkQ3RE",
+    avatarURL:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.kindpng.com%2Ffree%2Favatar-icon%2F&psig=AOvVaw1ZKF0f3KVoVjkAL2-yHvEW&ust=1635257762564000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLCHs8jg5fMCFQAAAAAdAAAAABAD",
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo"
@@ -24,7 +26,8 @@ let users = {
   johndoe: {
     id: "johndoe",
     name: "John Doe",
-    avatarURL: "https://unsplash.com/photos/jzz_3jWMzHA",
+    avatarURL:
+      "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.kindpng.com%2Ffree%2Favatar-icon%2F&psig=AOvVaw1ZKF0f3KVoVjkAL2-yHvEW&ust=1635257762564000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCLCHs8jg5fMCFQAAAAAdAAAAABAD",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
