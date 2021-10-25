@@ -1,120 +1,104 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "./Nav";
 import PageNotFound from "./PageNotFound";
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleAnswerQuestion } from "../actions/questions";
 
-class Question extends Component {
-  componentDidMount() {
-    if (this.props.authedUser === null)
-      this.props.history.push(`/login/redirect/${this.props.match.params.id}`);
-  }
+const Question = (props) => {
+  const [option, setOption] = useState("");
+  const [submitError, setSubmitError] = useState(false);
+  const dispatch = useDispatch();
+  const data = useSelector(({ authedUser, questions, users }, props) => {
+    const { id } = props.match.params;
+    return {
+      question: questions ? questions[id] : null,
+      author: users && questions[id] ? users[questions[id].author] : null,
+      authedUser: authedUser ? authedUser : null
+    };
+  });
+  useEffect(() => {
+    if (data.authedUser === null)
+      props.history.push(`/login/redirect/${props.match.params.id}`);
+  }, [data.authedUser, props.history, props.match.params.id]);
 
-  state = {
-    option: "",
-    submitError: false
+  const handleRadioOptionChange = (value) => {
+    setOption(value);
+    setSubmitError(false);
   };
 
-  handleRadioOptionChange = (value) => {
-    this.setState({
-      option: value,
-      submitError: false
-    });
-  };
-
-  handleSubmit = () => {
-    const { option } = this.state;
+  const handleSubmit = () => {
     if (option === "") {
-      this.setState({
-        submitError: true
-      });
+      setSubmitError(true);
       return;
     }
 
     // save answer
-    this.props.dispatch(
-      handleAnswerQuestion(
-        this.props.authedUser,
-        this.props.match.params.id,
-        option
-      )
+    dispatch(
+      handleAnswerQuestion(data.authedUser, props.match.params.id, option)
     );
 
     // redirect to result page
-    this.props.history.push(`/results/${this.props.match.params.id}`);
+    props.history.push(`/results/${props.match.params.id}`);
   };
+  const { question, author } = data;
 
-  render() {
-    const { question, author } = this.props;
-    const { submitError } = this.state;
-
-    if (question === undefined) {
-      return <PageNotFound />;
-    }
-
-    return (
-      <div className="text-center">
-        <Nav />
-        <br />
-        <div className="card center-block">
-          {submitError && (
-            <div>
-              <small className="pink-text">You have to select an answer</small>
-              <br />
-              <br />
-            </div>
-          )}
-          {author && (
-            <div>
-              <img
-                src={author.avatarURL}
-                className="profile-image"
-                alt="profile"
-              />
-              <h3>
-                <small>{author.name} asks:</small>
-              </h3>
-            </div>
-          )}
-          <p>Would you rather?</p>
-          {question && (
-            <form action="" className="question-form">
-              <input
-                type="radio"
-                name="answer"
-                value="optionOne"
-                onChange={(e) => this.handleRadioOptionChange(e.target.value)}
-              />{" "}
-              {question.optionOne.text}
-              <br />
-              <span>Or</span>
-              <br />
-              <input
-                type="radio"
-                name="answer"
-                value="optionTwo"
-                onChange={(e) => this.handleRadioOptionChange(e.target.value)}
-              />{" "}
-              {question.optionTwo.text}
-              <br />
-            </form>
-          )}
-          <button className="addquestion" onClick={this.handleSubmit}>
-            Submit
-          </button>
-        </div>
-      </div>
-    );
+  if (question === undefined) {
+    return <PageNotFound />;
   }
-}
 
-function mapStateToProps({ authedUser, questions, users }, props) {
-  const { id } = props.match.params;
-  return {
-    question: questions ? questions[id] : null,
-    author: users && questions[id] ? users[questions[id].author] : null,
-    authedUser: authedUser ? authedUser : null
-  };
-}
+  return (
+    <div className="text-center">
+      <Nav />
+      <br />
+      <div className="card center-block">
+        {submitError && (
+          <div>
+            <small className="pink-text">You have to select an answer</small>
+            <br />
+            <br />
+          </div>
+        )}
+        {author && (
+          <div>
+            <img
+              src={author.avatarURL}
+              className="profile-image"
+              alt="profile"
+            />
+            <h3>
+              <small>{author.name} asks:</small>
+            </h3>
+          </div>
+        )}
+        <p>Would you rather?</p>
+        {question && (
+          <form action="" className="question-form">
+            <input
+              type="radio"
+              name="answer"
+              value="optionOne"
+              onChange={(e) => handleRadioOptionChange(e.target.value)}
+            />{" "}
+            {question.optionOne.text}
+            <br />
+            <span>Or</span>
+            <br />
+            <input
+              type="radio"
+              name="answer"
+              value="optionTwo"
+              onChange={(e) => handleRadioOptionChange(e.target.value)}
+            />{" "}
+            {question.optionTwo.text}
+            <br />
+          </form>
+        )}
+        <button className="addquestion" onClick={handleSubmit}>
+          Submit
+        </button>
+      </div>
+    </div>
+  );
+};
 
-export default connect(mapStateToProps)(Question);
+export default Question;
