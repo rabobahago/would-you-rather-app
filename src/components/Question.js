@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Nav from "./Nav";
 import PageNotFound from "./PageNotFound";
 import { connect } from "react-redux";
-import { handleAnswerQuestion } from "../../actions/questions";
+import { handleAnswerQuestion } from "../actions/questions";
 
 class Question extends Component {
   componentDidMount() {

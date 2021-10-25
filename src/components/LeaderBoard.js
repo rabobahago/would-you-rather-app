@@ -58,5 +58,4 @@ function mapStateToProps({ users }) {
     users: userArray.sort((a, b) => b.score - a.score)
   };
 }
-
 export default connect(mapStateToProps)(LeaderBoard);

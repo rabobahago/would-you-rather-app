@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withRouter, NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { authenticate } from "../../actions/shared";
+import { authenticate } from "../actions/shared";
 
 class Nav extends Component {
   handleLogout = () => {
