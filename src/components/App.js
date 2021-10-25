@@ -6,7 +6,7 @@ import Header from "./Header";
 import PageNotFound from "./PageNotFound";
 import Login from "./Login";
 import Home from "./Home";
-import { AddQuestion } from "../redux/actions/shared";
+import AddQuestion from ".AddQuestion";
 import LeaderBoard from "./LeaderBoard";
 import Question from "./Question";
 import Result from "./Result";
