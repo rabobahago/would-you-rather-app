@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { authenticate } from "../actions/shared";
+import { authenticate } from "../../actions/shared";
 
 class Login extends Component {
   state = {
