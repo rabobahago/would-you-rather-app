@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { useParams } from "react-router-dom";
 import Nav from "./Nav";
 import PageNotFound from "./PageNotFound";
 import { connect } from "react-redux";
@@ -6,7 +7,7 @@ import { connect } from "react-redux";
 class Result extends Component {
   render() {
     const { question, users, author, authedUser } = this.props;
-    const { id } = this.props.match.params;
+    const { id } = useParams;
 
     let optionOneVotes = 0;
     let optionTwoVotes = 0;
