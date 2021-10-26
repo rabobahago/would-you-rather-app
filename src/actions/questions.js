@@ -1,59 +1,59 @@
-import { saveQuestionAnswer, saveQuestion } from '../utils/api'
+import { saveQuestionAnswer, saveQuestion } from "../utils/api";
 
-import { handleAddQuestionToUser, handleAddAnswerToUser } from '../actions/users'
+import {
+  handleAddQuestionToUser,
+  handleAddAnswerToUser
+} from "../actions/users";
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
-export const ADD_QUESTION = 'ADD_QUESTION'
-export const ANSWER_QUESTION = 'ANSWER_QUESTION'
+export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
+export const ADD_QUESTION = "ADD_QUESTION";
+export const ANSWER_QUESTION = "ANSWER_QUESTION";
 
-function addQuestion (question) {
+const addQuestion = (question) => {
   return {
     type: ADD_QUESTION,
-    question,
-  }
-}
+    question
+  };
+};
 
-export function handleAddQuestion (optionOneText, optionTwoText, author) {
+export const handleAddQuestion = (optionOneText, optionTwoText, author) => {
   return (dispatch) => {
-
     return saveQuestion({
-        optionOneText, 
-        optionTwoText, 
-        author
-    })
-      .then((question) => {
-        dispatch(addQuestion(question))
-        dispatch(handleAddQuestionToUser(question))
-      })
-  }
-}
+      optionOneText,
+      optionTwoText,
+      author
+    }).then((question) => {
+      dispatch(addQuestion(question));
+      dispatch(handleAddQuestionToUser(question));
+    });
+  };
+};
 
-export function receiveQuestions (questions) {
+export const receiveQuestions = (questions) => {
   return {
     type: RECEIVE_QUESTIONS,
-    questions,
-  }
-}
+    questions
+  };
+};
 
-function answerQuestion (authedUser, qid, answer) {
+const answerQuestion = (authedUser, qid, answer) => {
   return {
     type: ANSWER_QUESTION,
-    authedUser, 
-    qid, 
+    authedUser,
+    qid,
     answer
-  }
-}
+  };
+};
 
-export function handleAnswerQuestion (authedUser, qid, answer ) {
+export const handleAnswerQuestion = (authedUser, qid, answer) => {
   return (dispatch) => {
     return saveQuestionAnswer({
-      qid, 
-      authedUser, 
+      qid,
+      authedUser,
       answer
-    })
-    .then(({authedUser, qid, answer}) => {
-      dispatch(answerQuestion(authedUser, qid, answer))
-      dispatch(handleAddAnswerToUser(authedUser, qid, answer))
-    })
-  }
-}
+    }).then(({ authedUser, qid, answer }) => {
+      dispatch(answerQuestion(authedUser, qid, answer));
+      dispatch(handleAddAnswerToUser(authedUser, qid, answer));
+    });
+  };
+};

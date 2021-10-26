@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import Nav from "./Nav";
 import PageNotFound from "./PageNotFound";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAnswerQuestion } from "../actions/questions";
 
 const Question = (props) => {
+  const { id } = useParams();
   const [option, setOption] = useState("");
   const [submitError, setSubmitError] = useState(false);
   const dispatch = useDispatch();
   const data = useSelector(({ authedUser, questions, users }, props) => {
-    const { id } = props.match.params;
     return {
       question: questions ? questions[id] : null,
       author: users && questions[id] ? users[questions[id].author] : null,
