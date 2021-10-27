@@ -51,7 +51,7 @@ export const handleAnswerQuestion = (authedUser, qid, answer) => {
       qid,
       authedUser,
       answer
-    }).then(({ authedUser, qid, answer }) => {
+    }).then(() => {
       dispatch(answerQuestion(authedUser, qid, answer));
       dispatch(handleAddAnswerToUser(authedUser, qid, answer));
     });
